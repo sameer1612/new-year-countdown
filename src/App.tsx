@@ -16,7 +16,13 @@ function App() {
       const minutes = Math.floor((diff / 1000 / 60) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
 
-      setTime(`${days}d ${hours}h ${minutes}m ${seconds}s`);
+      const parts = [];
+      if (days > 0) parts.push(`${days}d`);
+      if (hours > 0) parts.push(`${hours}h`);
+      if (minutes > 0) parts.push(`${minutes}m`);
+      parts.push(`${seconds}s`); // Always show seconds
+
+      setTime(parts.join(" "));
     }, 1000);
 
     return () => clearInterval(interval);
